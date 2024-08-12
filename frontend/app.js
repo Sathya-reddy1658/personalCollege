@@ -36,6 +36,17 @@ app.get('/classroom/subject/:sub', (req, res) => {
   }
 });
 
+
+app.get('/classroom/subject/botony/:concept', (req, res) => {
+  const concept = req.params.concept;
+
+  if (concept === "celltheory") {
+    res.render('Concepts/celltheory');
+  } else {
+    res.status(404).send("Concept is Under Built ");
+  }
+});
+
 app.all('*', (req, res) => {
   res.status(404).send("404 NOT FOUND!");
 });
