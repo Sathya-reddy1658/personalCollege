@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8080;
+const models = require('../frontend/models.js');
 
 app.use(express.static("public"));
 
@@ -44,6 +45,17 @@ app.get('/classroom/subject/botony/:concept', (req, res) => {
     res.render('Concepts/celltheory');
   } else {
     res.status(404).send("Concept is Under Built ");
+  }
+});
+
+app.get('/classroom/subject/botony/celltheory/:model', (req, res) => {
+  const model = req.params.model;
+  const modelData = models.find(m => m.name === model);
+  console.log(modelData);
+  if (modelData) {
+    res.render('show/show', { modelData });
+  } else {
+    res.status(404).send("Model not found");
   }
 });
 
