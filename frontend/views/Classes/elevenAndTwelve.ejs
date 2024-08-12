@@ -41,11 +41,23 @@
       </div>
     </div>
   </nav>
-
+  <div class=" pt-10 hero h-[90vh] w-full text-white flex-col flex items-center  " >
+    <h1 class="text-3xl font-bold" >Personal Classroom(AR/VR)</h1>
+    <div class="flex gap-10 mt-20 flex-wrap items-center justify-center " >
+        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('botony')" >Botony</div>
+        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('zoology')" >Zoology</div>
+        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('chemistry')" >Chemistry</div>
+        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('physics')" >Physics</div>
+        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('math')" >Maths</div>
+    </div>
+  </div>
  </div>
     <script>
         function redirectClassroom() {
             window.location.href="/classroom"
+        }
+        function redirect(target) {
+          window.location.href = `/classroom/subject/${encodeURIComponent(target)}`;
         }
     </script>
   </body>
