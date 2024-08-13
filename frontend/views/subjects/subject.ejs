@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= subject.name %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      h1 {
+        text-transform: uppercase;
+      }
+
+      .montserrat {
+        font-family: "Montserrat", sans-serif;
+      }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="montserrat">
+    <div id="main" class="w-full h-[200vh] bg-black">
+      <nav
+        class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
+      >
+        <h1
+          class="uppercase text-3xl cursor-pointer"
+          onclick="goToHome()"
+        >
+          Pre-College
+        </h1>
+        <div class="flex justify-center gap-20 items-center">
+          <div class="flex gap-10">
+            <h1 class="text-xl cursor-pointer" onclick="goToClassroom()">
+              Classroom
+            </h1>
+            <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()" >Pro Roadmap</h1>
+          </div>
+          <div class="rounded-full h-10 overflow-hidden w-10 bg-white">
+            <img
+              width="24"
+              height="24"
+              class="h-full w-full filter-0 cursor-pointer"
+              src="https://img.icons8.com/material-rounded/24/user.png"
+              alt="user"
+            />
+          </div>
+        </div>
+      </nav>
+      <div
+        class="pt-10 hero h-[100vh] w-full text-white flex-col flex items-center"
+      >
+        <h1 class="text-4xl font-bold">
+          Select the Chapter That You Want to See:
+        </h1>
+        <div
+          class="flex gap-5 mt-20 flex-wrap items-center flex-col justify-center w-full"
+        >
+          <% subject.chapters.forEach(function(chapter) { %>
+          <div
+            onclick="goToChapter('<%= subject.key %>', '<%= chapter.key %>')"
+            class="flex hover:scale-95 hover:duration-600 justify-between bg-violet-400 py-5 px-10 w-[70%] items-center font-bold rounded-md cursor-pointer"
+          >
+            <img
+              width="48"
+              height="48"
+              src="<%= chapter.icon %>"
+            />
+            <h1><%= chapter.name %></h1>
+            <h1>Earned Points: <%= chapter.points %></h1>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <script>
+      function goToHome() {
+        window.location.href = "/";
+      }
+      
+      function goToClassroom() {
+        window.location.href = "/classroom";
+      }
+
+      function redirectRoadmapgen(){
+          window.location.href="/roadmap"
+        }
+      function goToChapter(subjectKey, chapterKey) {
+        window.location.href = `/classroom/subject/${subjectKey}/${encodeURIComponent(chapterKey)}`;
+      }
+    </script>
+  </body>
+</html>
