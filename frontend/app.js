@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 8080;
 const models = require('../frontend/models.js');
+const askgroq = require('./generate-roadmap.js');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
@@ -13,6 +16,16 @@ app.get('/', (req, res) => {
 
 app.get('/classroom', (req, res) => {
   res.render('classroom');
+});
+
+app.get('/roadmap', (req, res) => {
+  res.render('map-prompt');
+});
+
+app.post('/roadmap', async(req,res) =>{
+  console.log(req.body);
+  const resp = await askgroq(req.body.prompt);
+  res.render('map', {resp : resp});
 });
 
 app.get('/classroom/:class', (req, res) => {
