@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      h1 {
+        text-transform: uppercase;
+      }
+      .montserrat {
+        font-family: "Montserrat", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="montserrat">
+    <div id="main" class="w-full h-[100vh] bg-black">
+      <nav
+        class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
+      >
+        <h1
+          class="uppercase text-3xl cursor-pointer"
+          onclick="window.location.href='/'"
+        >
+          Pre-College
+        </h1>
+        <div class="flex justify-center gap-20 items-center">
+          <div class="flex gap-10">
+            <h1 class="text-xl cursor-pointer" onclick="redirectClassroom()">
+              Classroom
+            </h1>
+            <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()">
+              Pro Roadmap
+            </h1>
+          </div>
+          <div
+            class="rounded-full h-10 overflow-hidden w-10 bg-white"
+            onclick="GoLogin()"
+          >
+            <img
+              src="../assets/user.png"
+              class="h-full w-full filter-0 cursor-pointer"
+              alt="User Icon"
+            />
+          </div>
+        </div>
+      </nav>
+      <div class="w-full h-[80vh] flex items-center justify-center">
+        <div class="p-10 rounded-md bg-violet-400">
+          <h1 class="text-center font-bold text-4xl">SignIn</h1>
+          <div class="form flex flex-col gap-10 mt-4">
+            <input
+              type="text"
+              class="text-black rounded-md px-20 py-2"
+              id="name"
+              required
+              placeholder="Enter Your Name"
+            />
+            <input
+              type="email"
+              class="text-black rounded-md px-20 py-2"
+              id="email"
+              required
+              placeholder="Enter Your Email"
+            />
+            <input
+              type="text"
+              class="text-black rounded-md px-20 py-2"
+              id="phnumber"
+              inputmode="numeric"
+              required
+              placeholder="Enter Your Phone Number"
+            />
+            <input
+              type="password"
+              class="text-black rounded-md px-20 py-2"
+              id="password"
+              required
+              placeholder="Enter Your Password"
+            />
+            <button class="bg-red-200 px-4 py-2 rounded-md">Signin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // const signInschema = z.object({
+      //   name: z.string().min(1, "Name is required"),
+      //   email: z.string().email("Invalid email format"),
+      //   phnumber: z
+      //     .string()
+      //     .length(10, "Phone number must be exactly 10 digits"),
+      //   password: z.string().min(6, "Password must be at least 6 characters"),
+      // });
+
+      document.querySelector("button").addEventListener("click", () => {
+        let name = document.querySelector("#name").value;
+        let email = document.querySelector("#email").value;
+        let password = document.querySelector("#password").value;
+        let phnumber = document.querySelector("#phnumber").value;
+
+        const Data = {
+          name,
+          email,
+          password,
+          phnumber,
+        };
+
+        fetch("http://localhost:8080/login", {
+          method: "POST",
+          body: JSON.stringify({
+            Data,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((res) => {
+            const json = res.json();
+            return json;
+          })
+          .then((data) => console.log("Data is Been Served to the Backend"))
+          .catch((err) => console.log(err));
+      });
+      function redirectClassroom() {
+        window.location.href = "/classroom";
+      }
+      function redirectRoadmapgen() {
+        window.location.href = "/roadmap";
+      }
+      function GoLogin() {
+        window.location.href = "/login";
+      }
+    </script>
+  </body>
+</html>

@@ -1,19 +1,53 @@
-const express = require('express');
-const {subjectsData} = require('./models/subjectData')
-const models = require('./models/models')
+const express = require("express");
+const { subjectsData } = require("./models/subjectData");
+const models = require("./models/models");
 const app = express();
+require("dotenv").config();
 const port = 8080;
-const askgroq = require('./generate-roadmap.js');
-const bodyParser = require('body-parser');
+const { z } = require("zod");
+const askgroq = require("./generate-roadmap.js");
+const bodyParser = require("body-parser");
+
 app.use(bodyParser.urlencoded({ extended: true }));
+// const mongoose = require('mongoose');
+
+// mongoose.connect(process.env.MONGODB_URL)
 
 app.use(express.static("public"));
-
+app.use(express.json());
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+app.get("/login", (req, res) => {
+  res.render("Auth/signin");
+});
+
+app.post("/login", (req, res) => {
+  const { Data } = req.body;
+  if (Data) {
+    const signInschema = z.object({
+      name: z.string().min(1, "Name is required"),
+      email: z.string().email("Invalid email format"),
+      phnumber: z.string().length(10, "Phone number must be exactly 10 digits"),
+      password: z.string().min(6, "Password must be at least 6 characters"),
+    });
+    
+    console.log("Received Data:", Data);
+
+    const parsedData = signInschema.safeParse(Data);
+    if (!parsedData.success) {
+      return res.status(400).json({ success: false, message: req.flash("error") });
+    } else {
+      return res.status(200).json({ success: true, message: req.flash("success") });
+    }
+  } else {
+    return res.status(400).json({ success: false, message: req.flash("error") });
+  }
+});
+
 
 app.get("/classroom", (req, res) => {
   res.render("classroom");
@@ -46,22 +80,22 @@ app.get("/classroom/subject/:subjectName", (req, res) => {
   }
 });
 
-
 app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
   const { subjectName, concept } = req.params;
   const subject = subjectsData[subjectName.toLowerCase()];
-  
+
   if (subject) {
     const chapter = subject.chapters.find(
       (chap) => chap.key === concept.toLowerCase()
     );
-    
+
     if (chapter) {
       const conceptData = {
         name: chapter.name,
         title: chapter.title || chapter.name,
-        description: chapter.description || "Detailed information about this concept.",
-        models: models.filter(model => chapter.models.includes(model.name))
+        description:
+          chapter.description || "Detailed information about this concept.",
+        models: models.filter((model) => chapter.models.includes(model.name)),
       };
       res.render("Concepts/concept", { subject, concept: conceptData });
     } else {
@@ -72,25 +106,24 @@ app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
   }
 });
 
-app.get('/show', (req, res) => {
+app.get("/show", (req, res) => {
   const modelLink = req.query.link;
-  res.render('VR_AND_AR/show', { link: modelLink });
+  res.render("VR_AND_AR/show", { link: modelLink });
 });
 
 //////////////////////////////////////////ROADMAP//////////////////////////////////////////
 
-
-app.get('/roadmap', (req, res) => {
-  res.render('map-prompt');
+app.get("/roadmap", (req, res) => {
+  res.render("map-prompt");
 });
 
-app.post('/roadmap', async(req,res) =>{
+app.post("/roadmap", async (req, res) => {
   console.log(req.body);
   const resp = await askgroq(req.body.prompt);
-  res.render('map', {resp : resp});
+  res.render("map", { resp: resp });
 });
 
-app.all('*', (req, res) => {
+app.all("*", (req, res) => {
   res.status(404).send("404 NOT FOUND!");
 });
 
