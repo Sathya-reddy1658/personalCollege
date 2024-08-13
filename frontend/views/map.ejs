@@ -22,7 +22,7 @@
     </style>
   </head>
   <body class="montserrat">
- <div id="main" class="w-full h-[100vh] bg-black " >
+ <div id="main" class="w-full h-32 bg-black " >
     <nav
     class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
   >
@@ -41,7 +41,35 @@
       </div>
     </div>
   </nav>
-
+ </div>
+ <div>
+    <% if(resp) {%>
+        <h1>Course Links: </h1>
+        <% if(resp.free_courses) {%>
+        <% resp.free_courses.forEach(e => { %>
+            <h1><%= e.title %>, Link: <%= e.link %></h1>
+        <% }); %>
+        <% } else {%>
+            <% resp.freeCourses.forEach(e => { %>
+                <h1><%= e.title %>, Link: <%= e.link %></h1>
+            <% }); %>
+        <% } %>
+        <hr>
+        <h1>Roadmap: </h1>
+            <% resp.roadmap.forEach(e => { %>
+                <h3><%= e.section %>, <%= e.estimatedTime || e.estimated_time %> Weeks</h3>
+                <ul>
+                    <% e.subtopics.forEach(e => { %>
+                        <li>Title: <%=e.title %>, 
+                            <button><a href="<%=e.resources[0]%>">Link 1</a></button>
+                            <button><a href="<%=e.resources[1]%>">Link 2</a></button>
+                        </li>
+                    <% }); %>
+                    <br><br>
+                </ul>
+                <br><br><br>
+            <% }); %>
+    <% } %>
  </div>
     <script>
         function redirectClassroom() {
