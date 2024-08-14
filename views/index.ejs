@@ -32,7 +32,7 @@
         <h1 class="text-xl cursor-pointer" onclick="redirectClassroom()" >Classroom</h1>
         <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()" >Pro Roadmap</h1>
       </div>
-      <div class="rounded-full h-10 overflow-hidden w-10 bg-white" onclick="GoLogin()" >
+      <div class="rounded-full h-10 overflow-hidden w-10 bg-white" onclick="goToSignIn()" >
         <img
           src="../assets/user.png"
           class="h-full w-full filter-0 cursor-pointer"
@@ -50,8 +50,8 @@
         function redirectRoadmapgen(){
           window.location.href="/roadmap"
         }
-        function GoLogin() {
-          window.location.href = '/login'
+        function goToSignIn() {
+          window.location.href = '/signIn'
         }
     </script>
   </body>

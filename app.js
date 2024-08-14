@@ -21,32 +21,36 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/signIn", (req, res) => {
+  res.render("signin");
+});
+
 app.get("/login", (req, res) => {
-  res.render("Auth/signin");
+  res.render("login");
 });
 
-app.post("/login", (req, res) => {
-  const { Data } = req.body;
-  if (Data) {
-    const signInschema = z.object({
-      name: z.string().min(1, "Name is required"),
-      email: z.string().email("Invalid email format"),
-      phnumber: z.string().length(10, "Phone number must be exactly 10 digits"),
-      password: z.string().min(6, "Password must be at least 6 characters"),
-    });
+// app.post("/login", (req, res) => {
+//   const { Data } = req.body;
+//   if (Data) {
+//     const signInschema = z.object({
+//       name: z.string().min(1, "Name is required"),
+//       email: z.string().email("Invalid email format"),
+//       phnumber: z.string().length(10, "Phone number must be exactly 10 digits"),
+//       password: z.string().min(6, "Password must be at least 6 characters"),
+//     });
     
-    console.log("Received Data:", Data);
+//     console.log("Received Data:", Data);
 
-    const parsedData = signInschema.safeParse(Data);
-    if (!parsedData.success) {
-      return res.status(400).json({ success: false, message: req.flash("error") });
-    } else {
-      return res.status(200).json({ success: true, message: req.flash("success") });
-    }
-  } else {
-    return res.status(400).json({ success: false, message: req.flash("error") });
-  }
-});
+//     const parsedData = signInschema.safeParse(Data);
+//     if (!parsedData.success) {
+//       return res.status(400).json({ success: false});
+//     } else {
+//       return res.status(200).json({ success: true});
+//     }
+//   } else {
+//     return res.status(400).json({ success: false});
+//   }
+// });
 
 
 app.get("/classroom", (req, res) => {
