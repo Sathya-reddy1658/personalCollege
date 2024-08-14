@@ -2,7 +2,7 @@ const Groq = require("groq-sdk");
 require("dotenv").config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 async function askgroq(data) {
-    let prompt = `I want to learn ${data}. Generate me a roadmap in a specific format. Split it into sections with estimated time it would take to complete them(in weeks). List out subtopics for each section(max 6, divide in that manner) and provide links to resources to learn those topics. Also provide free courses/resources links at the top of the response. generate the data in the form of a json.The free courses should also be part of the json`;
+    let prompt = `I want to learn ${data}. Generate me a roadmap in a specific format. Split it into sections with estimated time it would take to complete them(in weeks). List out subtopics for each section(max 6, divide in that manner) and provide links to resources to learn those topics. Also provide free courses/resources links at the top of the response. *generate the data in the form of a json*.The free courses should also be part of the json`;
     let response = "";
     try {
     const chatCompletion = await groq.chat.completions.create({
