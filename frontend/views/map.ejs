@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -8,76 +8,128 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
     />
     <style>
-      h1 {
-        text-transform: uppercase;
-      }
+        h1 {
+            text-transform: uppercase;
+        }
 
-      .montserrat {
-        font-family: "Montserrat", sans-serif;
-      }
+        .montserrat {
+            font-family: "Montserrat", sans-serif;
+        }
     </style>
-  </head>
-  <body class="montserrat">
- <div id="main" class="w-full h-32 bg-black " >
+</head>
+<body class="montserrat">
+<div id="main" class="w-full h-20 bg-black ">
     <nav
-    class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
-  >
-  <h1 class="upppercase text-3xl cursor-pointer" onclick="window.location.href='/'" >Pre-College</h1>
-    <div class="flex justify-center gap-20 items-center">
-      <div class="flex gap-10">
-        <h1 class="text-xl cursor-pointer" onclick="redirectClassroom()" >Classroom</h1>
-        <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()" >Pro Roadmap</h1>
-      </div>
-      <div class="rounded-full h-10 overflow-hidden w-10 bg-white">
-        <img
-          src="../assets/user.png"
-          class="h-full w-full filter-0 cursor-pointer"
-          alt=""
-        />
-      </div>
-    </div>
-  </nav>
- </div>
- <div>
-    <% if(resp) {%>
-        <h1>Course Links: </h1>
-        <% if(resp.free_courses) {%>
-        <% resp.free_courses.forEach(e => { %>
-            <h1><%= e.title %>, Link: <%= e.link %></h1>
-        <% }); %>
-        <% } else {%>
+        class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
+    >
+        <h1 class="text-3xl cursor-pointer" onclick="window.location.href='/'">Pre-College</h1>
+        <div class="flex justify-center gap-20 items-center">
+            <div class="flex gap-10">
+                <h1 class="text-xl cursor-pointer" onclick="redirectClassroom()">Classroom</h1>
+                <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()">Pro Roadmap</h1>
+            </div>
+            <div class="rounded-full h-10 overflow-hidden w-10 bg-white">
+                <img
+                    src="../assets/user.png"
+                    class="h-full w-full cursor-pointer"
+                    alt=""
+                />
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="px-5 py-3">
+    <% if (resp) { %>
+        <h1 class="text-4xl">Course Links: </h1>
+        
+        <% if (resp.free_courses) { %>
+            <% resp.free_courses.forEach(e => { %>
+
+                <div class="flex justify-between px-10 py-2 my-2 bg-emerald-200 border border-black rounded-lg"><h1><%= e.title %></h1><button class="border border-black rounded-sm px-2 py-1 cursor-pointer"><a href="<%= e.link %>" target="_blank" rel="noopener noreferrer">Link</a></button></div>
+            <% }); %>
+        <% } else { %>
             <% resp.freeCourses.forEach(e => { %>
-                <h1><%= e.title %>, Link: <%= e.link %></h1>
+              <div class="flex justify-between px-10 py-2 my-2 bg-emerald-300 border border-black rounded-lg"><h1><%= e.title %></h1><button class="border border-black rounded-sm px-2 py-1 cursor-pointer"><a href="<%= e.link %>" target="_blank" rel="noopener noreferrer">Link</a></button></div>
             <% }); %>
         <% } %>
-        <hr>
-        <h1>Roadmap: </h1>
-            <% resp.roadmap.forEach(e => { %>
-                <h3><%= e.section %>, <%= e.estimatedTime || e.estimated_time %> Weeks</h3>
-                <ul>
-                    <% e.subtopics.forEach(e => { %>
-                        <li>Title: <%=e.title %>, 
-                            <button><a href="<%=e.resources[0]%>">Link 1</a></button>
-                            <button><a href="<%=e.resources[1]%>">Link 2</a></button>
-                        </li>
-                    <% }); %>
-                    <br><br>
-                </ul>
-                <br><br><br>
-            <% }); %>
-    <% } %>
- </div>
-    <script>
-        function redirectClassroom() {
-            window.location.href="/classroom"
-        }
-        function redirectRoadmapgen(){
-          window.location.href="/roadmap"
-        }
-    </script>
-  </body>
+        </div>
+        <br>
+</div>
+<h1 class="text-4xl px-5 py-3">Roadmap: </h1>
+<div class="container mx-auto p-6">
+    <div class="relative">
+        <div class="absolute w-1 bg-gray-300 h-full left-1/2 transform -translate-x-1/2"></div>
+
+        <!-- Timeline items -->
+        
+        <% let cnt = 1; %>
+        <% resp.roadmap.forEach(e => { %>
+        <div class="mb-8 flex justify-between items-center w-full">
+            <% if (cnt % 2 === 0) { %>
+                <!-- Left-aligned -->
+                <div class="order-1 bg-sky-200 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                    <h3 class="mb-3 font-bold text text-xl"><%= e.section %><br><br><%= e.estimatedTime || e.estimated_time %> Weeks</h3>
+                    <br>
+                    <ul class="list-disc">
+                          <p class="text-sm leading-snug tracking-wide text-white text-opacity-100">
+                            <% e.subtopics.forEach(subtopic => { %>
+                                <li class="py-3 px-2"><%= subtopic.title || subtopic.topic %><br> 
+                                    <% if(subtopic.resources && subtopic.resources.length > 0) { %>
+                                        <% subtopic.resources.forEach((resource, index) => { %>
+                                            <button class="border border-black rounded-sm px-2 py-1 cursor-pointer"><a href="<%= resource %>" target="_blank" rel="noopener noreferrer">Link <%= index + 1 %></a></button>
+                                        <% }); %>
+                                    <% } %>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </p>
+                </div>
+                <div class="z-20 flex items-center order-2 bg-orange-600 shadow-xl w-8 h-8 rounded-full">
+                    <h1 class="mx-auto text-white font-semibold text-lg"><%= cnt %></h1>
+                </div>
+                <div class="order-3 w-5/12"></div>
+            <% } else { %>
+                <!-- Right-aligned -->
+                <div class="order-1 w-5/12"></div>
+                <div class="z-20 flex items-center order-2 bg-orange-600 shadow-xl w-8 h-8 rounded-full">
+                    <h1 class="mx-auto text-white font-semibold text-lg"><%= cnt %></h1>
+                </div>
+                <div class="order-3 bg-amber-200 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                    <h3 class="mb-3 font-bold text-xl"><%= e.section %><br><br><%= e.estimatedTime || e.estimated_time %> Weeks</h3>
+                    <br>
+                    <p class="text-sm leading-snug tracking-wide text-white text-opacity-100">
+                        <ul class="list-disc">
+                            <% e.subtopics.forEach(subtopic => { %>
+                                <li class="py-3 px-2"><%= subtopic.title || subtopic.topic %><br>
+                                    <% if(subtopic.resources && subtopic.resources.length > 0) { %>
+                                        <% subtopic.resources.forEach((resource, index) => { %>
+                                            <button class="border border-black rounded-sm px-2 py-1 cursor-pointer"><a href="<%= resource %>" target="_blank" rel="noopener noreferrer">Link <%= index + 1 %></a></button>
+                                        <% }); %>
+                                    <% } %>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </p>
+                </div>
+            <% } %>
+        </div>
+        <% cnt++; %>
+        <% }); %>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    function redirectClassroom() {
+        window.location.href = "/classroom";
+    }
+    function redirectRoadmapgen(){
+        window.location.href = "/roadmap";
+    }
+</script>
+</body>
 </html>
