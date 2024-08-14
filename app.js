@@ -9,9 +9,6 @@ const askgroq = require("./generate-roadmap.js");
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-// const mongoose = require('mongoose');
-
-// mongoose.connect(process.env.MONGODB_URL)
 
 app.use(express.static("public"));
 app.use(express.json());
