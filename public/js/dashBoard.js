@@ -21,7 +21,7 @@ document
   .addEventListener("click", () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        window.location.href = "/dashBoard"; 
+        window.location.href = "/dashBoard";
       } else {
         window.location.href = "/login"; 
       }

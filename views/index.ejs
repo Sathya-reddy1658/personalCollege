@@ -23,24 +23,24 @@
   </head>
   <body class="montserrat">
  <div id="main" class="w-full h-[100vh] bg-black " >
-    <nav
-    class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
-  >
-  <h1 class="upppercase text-3xl cursor-pointer" onclick="window.location.href='/'" >Pre-College</h1>
-    <div class="flex justify-center gap-20 items-center">
-      <div class="flex gap-10">
-        <h1 class="text-xl cursor-pointer" onclick="redirectClassroom()" >Classroom</h1>
-        <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()" >Pro Roadmap</h1>
-      </div>
-      <div class="rounded-full h-10 overflow-hidden w-10 bg-white" onclick="goToSignUp()" >
-        <img
-          src="../assets/user.png"
-          class="h-full w-full filter-0 cursor-pointer"
-          alt=""
-        />
-      </div>
+  <nav class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <h1 class="text-3xl font-extrabold tracking-tight cursor-pointer hover:text-pink-200 transition duration-300" onclick="window.location.href='/'">
+            <i class="fas fa-graduation-cap mr-2"></i>Pre-College
+        </h1>
+        <div class="flex items-center space-x-8">
+            <a href="/classroom" class="text-xl font-medium hover:text-pink-200 transition duration-300">
+                <i class="fas fa-chalkboard-teacher mr-2"></i>Classroom
+            </a>
+            <a href="/roadmap" class="text-xl font-medium hover:text-pink-200 transition duration-300">
+                <i class="fas fa-map-marked-alt mr-2"></i>Pro Roadmap
+            </a>
+            <div class="relative group">
+                <img src="../assets/user.png" class="h-12 w-12 rounded-full border-2 border-pink-300 cursor-pointer transform transition-all duration-300 group-hover:scale-110" alt="User Avatar" onclick="goToSignUp()">
+            </div>
+        </div>
     </div>
-  </nav>
+</nav>
 
  </div>
     <script>
