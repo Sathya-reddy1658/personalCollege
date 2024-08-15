@@ -62,7 +62,7 @@ app.get("/classroom/:class", (req, res) => {
   const className = req.params.class;
 
   if (className === "11th" || className === "12th") {
-    res.render("Classes/classrooms");
+    res.render("Classes/classes");
   } else if (
     className === "1st" ||
     className === "2nd" ||

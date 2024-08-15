@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 document
-  .querySelector("img")
+  .querySelector(".nav-img")
   .addEventListener("click", () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
