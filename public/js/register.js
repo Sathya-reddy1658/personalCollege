@@ -3,12 +3,12 @@ import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID
+  apiKey: "AIzaSyCNdibGOnov2bBTXv1rAfei60Tl1Of4jjk",
+  authDomain: "smarteducationauth.firebaseapp.com",
+  projectId: "smarteducationauth",
+  storageBucket: "smarteducationauth.appspot.com",
+  messagingSenderId: "4287784881",
+  appId: "1:4287784881:web:f1fa5a9130cf192fd4bf90"
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -23,14 +23,14 @@ document.querySelector("button").addEventListener("click", () => {
     .then(async (userCredential) => {
       const user = userCredential.user;
 
-      // Store user data in Firestore
       await setDoc(doc(db, "users", user.uid), {
         name: name,
         email: email,
-        points: 0 // Initial points
+        points: 0
       });
 
       console.log("User created and points initialized:", user);
+      window.location.href = "/login";
     })
     .catch((error) => {
       console.error("Error creating user:", error);

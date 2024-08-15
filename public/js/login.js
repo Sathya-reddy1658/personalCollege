@@ -3,12 +3,12 @@ import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID
+  apiKey: "AIzaSyCNdibGOnov2bBTXv1rAfei60Tl1Of4jjk",
+  authDomain: "smarteducationauth.firebaseapp.com",
+  projectId: "smarteducationauth",
+  storageBucket: "smarteducationauth.appspot.com",
+  messagingSenderId: "4287784881",
+  appId: "1:4287784881:web:f1fa5a9130cf192fd4bf90"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -30,6 +30,9 @@ document.querySelector("button").addEventListener("click", () => {
         const userData = docSnap.data();
         console.log("User data:", userData);
         alert(`Welcome back! You have ${userData.points} points.`);
+        setTimeout(()=>{
+          window.location.href = '/dashBoard'
+        },3000)
       } else {
         console.log("No such document!");
       }

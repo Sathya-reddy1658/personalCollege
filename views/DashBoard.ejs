@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SignIn</title>
+    <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +15,7 @@
       h1 {
         text-transform: uppercase;
       }
+
       .montserrat {
         font-family: "Montserrat", sans-serif;
       }
@@ -26,7 +27,7 @@
         class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
       >
         <h1
-          class="uppercase text-3xl cursor-pointer"
+          class="upppercase text-3xl cursor-pointer"
           onclick="window.location.href='/'"
         >
           Pre-College
@@ -47,40 +48,15 @@
             <img
               src="../assets/user.png"
               class="h-full w-full filter-0 cursor-pointer"
-              alt="User Icon"
+              alt=""
             />
           </div>
         </div>
       </nav>
-      <div class="w-full h-[80vh] flex items-center justify-center">
-        <div class="p-10 rounded-md bg-white ">
-          <h1 class="text-center font-bold text-4xl">Login</h1>
-          <div class="form flex flex-col gap-10 mt-4">
-            <input
-              type="email"
-              class="text-black rounded-md px-20 py-2"
-              id="email"
-              required
-              placeholder="Enter Your Email"
-            />
-          
-            <input
-              type="password"
-              class="text-black rounded-md px-20 py-2"
-              id="password"
-              required
-              placeholder="Enter Your Password"
-            />
-            <button class="bg-red-200 px-4 py-2 rounded-md">login</button>
-            <div class="w-full flex justify-center " >
-                <h1 class="w-full text-center " >Don't have an account?</h1>
-                <h1 class="text-blue-400 underline " onclick="window.location.href='/signUp' " >Regsiter</h1>
-              </div>
-          </div>
-        </div>
-      </div>
+      <h1 class="text-white" >There You Go masala Boy</h1>
     </div>
-
+    <script type="module" src="../public/js/dashBoard.js" >
+    </script>
     <script>
       function redirectClassroom() {
         window.location.href = "/classroom";
@@ -89,7 +65,5 @@
         window.location.href = "/roadmap";
       }
     </script>
-    <script type="module" src="../js/login.js" ></script>
-    
   </body>
 </html>

@@ -18,8 +18,12 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/signIn", (req, res) => {
-  res.render("signin");
+app.get("/dashBoard", (req, res) => {
+  res.render("DashBoard");
+});
+
+app.get("/signUp", (req, res) => {
+  res.render("signUp");
 });
 
 app.get("/login", (req, res) => {
