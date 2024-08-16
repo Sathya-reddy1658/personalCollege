@@ -116,8 +116,8 @@ app.get("/show/:modelName",async  (req, res) => {
   const modelLink = req.query.link;
   const modelName = req.params.modelName;
   const info = await infoGen(modelName);
-  console.log(modelName);
-  console.log(info);
+  console.log(modelName); 
+  //console.log(info);
   res.render("VR_AND_AR/show", { link: modelLink, info: info });
 });
 

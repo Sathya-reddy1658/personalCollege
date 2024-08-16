@@ -10,17 +10,18 @@
 
 <body>
     <%- include("../includes/Navbar.ejs")%>
-        <div class="h-[200vh] w-full flex justify-start bg-[#6a00f4] bg-opacity-70 p-[1%] gap-[20px] overflow-hidden">
-            <iframe class="h-[40%] w-[65%] rounded-[10px] shadow-lg" title="3D Model Viewer" width="640" height="480"
+    <div class="min-h-screen w-full flex flex-col md:flex-row justify-start bg-gradient-to-br from-[#4a0072] via-[#6a00f4] to-[#9b4dff] p-[4%] gap-[30px] overflow-x-hidden">
+        <div class="w-full md:w-[65vw] aspect-video mb-8 md:mb-0">
+            <iframe class="w-full h-[60vh] rounded-[30px] shadow-2xl transform hover:shadow-2xl transition-all duration-100 ease-in-out backdrop-blur-sm bg-white/10" title="3D Model Viewer"
                 src="<%= link %>" frameborder="0" allow="autoplay; fullscreen; vr" allowfullscreen></iframe>
-              <div id="box">
-
-              </div>
-               
         </div>
+        <div id="box" class="w-full md:w-[30vw] text-white">
+            
+        </div>
+    </div>
 
 <script>
-    document.getElementById("box").textContent = `${<%- info.replace(/`/g, '&#x60;') %>}`;
+   document.getElementById("box").innerHTML = `<%- info %>`;
 </script>
 </body>
 

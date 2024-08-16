@@ -7,7 +7,7 @@ async function infoGen(Q){
             "messages": [{
                 "role": "user",
                 "content": `give me same as below but for topic ${Q} , don't chnage the styling 
-<div class="flex flex-col   text-justify w-[30%] border border-black rounded-[15px] p-[10px] h">
+<div class="flex flex-col   text-justify w-[full] border border-black rounded-[15px] p-[15px]">
                 <h1 class="text-[50px] font-extrabold">NEURONS <br></h1>
                 <p class="font-extralight">The messengers of human body </p>
                 <hr class="w-[90%] bg-blue-900 h-[5px]">
@@ -15,7 +15,7 @@ async function infoGen(Q){
                 <p class="text-[20px] font-extralight">Neurons are the basic building blocks of the nervous system, crucial for transmitting information
                     throughout the body. They facilitate everything from basic reflexes to complex thoughts and
                     emotions.</p>
-                <hr class="w-[90%] bg-blue-900 h-[5px]">
+                <hr class="w-[90%] bg-gray-900 h-[5px]">
                 <h2 class="text-[30px] font-bold ">Key Information</h2>
                 <ul class="flex flex-col gap-[10px]">
                     <li  class="text-[20px] font-extralight"><strong>Structure:</strong> Neurons consist of a cell body, dendrites (which receive signals),
@@ -39,7 +39,7 @@ async function infoGen(Q){
                     <li class="text-[20px] font-extralight"><strong>Neuroplasticity:</strong> The brain's ability to reorganize itself by forming new neural
                         connections throughout life, essential for learning, memory, and recovery from injury.</li>
                 </ul>
-                <hr class="w-[90%] bg-blue-900 h-[5px]">
+                <hr class="w-[90%] bg-gray-900 h-[5px]">
                 <h2 class="text-[30px] font-bold ">Important Facts</h2>
                 <ul class="flex flex-col gap-[10px] text-[20px] font-extralight"">
                     <li><strong>Fact 1:</strong> The human brain contains approximately 86 billion neurons.</li>
@@ -52,7 +52,7 @@ async function infoGen(Q){
                     <li><strong>Fact 5:</strong> Unlike most other cells, neurons generally do not regenerate, making
                         neural damage particularly significant.</li>
                 </ul>
-                <hr class="w-[90%] bg-blue-900 h-[8px]">
+                <hr class="w-[90%] bg-gray-900 h-[8px]">
                 <h2 class="text-[30px] font-bold"">Additional Information</h2>
                 <ul class="flex flex-col gap-[10px] text-[20px] font-extralight"">
                     <li><strong>Neural Networks:</strong> Neurons work together in networks to perform various tasks,
