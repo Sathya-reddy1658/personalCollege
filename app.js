@@ -41,7 +41,7 @@ app.get("/login", (req, res) => {
 //       phnumber: z.string().length(10, "Phone number must be exactly 10 digits"),
 //       password: z.string().min(6, "Password must be at least 6 characters"),
 //     });
-    
+
 //     console.log("Received Data:", Data);
 
 //     const parsedData = signInschema.safeParse(Data);
@@ -54,7 +54,6 @@ app.get("/login", (req, res) => {
 //     return res.status(400).json({ success: false});
 //   }
 // });
-
 
 app.get("/classroom", (req, res) => {
   res.render("classroom");
@@ -70,14 +69,14 @@ app.get("/classroom/:class", (req, res) => {
     className === "3rd"
   ) {
     res.render("Classes/classes", { subjects: classData[className].subjects });
-  } 
+  }
 });
-
 
 app.get("/classroom/subject/:subjectName", (req, res) => {
   const subjectName = req.params.subjectName.toLowerCase();
   const subject = subjectsData[subjectName];
-
+  console.log(subject);
+  console.log(subjectName);
   if (subject) {
     res.render("subjects/subject", { subject });
   } else {
@@ -87,10 +86,14 @@ app.get("/classroom/subject/:subjectName", (req, res) => {
 
 app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
   const { subjectName, concept } = req.params;
-  const subject = subjectsData[subjectName.toLowerCase()];
+  const lowerSubjectName = subjectName.toLowerCase();
+  const lowerConcept = concept.toLowerCase();
+
+  const subject = subjectsData[lowerSubjectName];
+
   if (subject) {
     const chapter = subject.chapters.find(
-      (chap) => chap.key === concept.toLowerCase()
+      (chap) => chap.key.toLowerCase() === lowerConcept
     );
 
     if (chapter) {
@@ -101,9 +104,9 @@ app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
           chapter.description || "Detailed information about this concept.",
         models: models.filter((model) => chapter.models.includes(model.name)),
       };
-      console.log(conceptData); 
       res.render("Concepts/concept", { subject, concept: conceptData });
     } else {
+      console.log("Concept not found:", lowerConcept);
       res.status(404).send("Concept not found");
     }
   } else {
@@ -111,11 +114,11 @@ app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
   }
 });
 
-app.get("/show/:modelName",async  (req, res) => {
+app.get("/show/:modelName", async (req, res) => {
   const modelLink = req.query.link;
   const modelName = req.params.modelName;
   const info = await infoGen(modelName);
-  console.log(modelName); 
+  console.log(modelName);
   //console.log(info);
   res.render("VR_AND_AR/show", { link: modelLink, info: info });
 });
