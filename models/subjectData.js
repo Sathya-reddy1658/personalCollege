@@ -77,7 +77,7 @@ const subjectsData = {
     chapters: [
       {
         key: "Quantum_Mechanics",
-        name: "Quantum Mechanics",
+        name: "Quantum_Mechanics",
         title: "The Mysteries of the Quantum World",  
         description: "Discover the principles of quantum mechanics, including wave-particle duality, uncertainty, and the quantum behavior of particles.", 
         points: 10,

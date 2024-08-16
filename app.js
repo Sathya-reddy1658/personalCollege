@@ -8,6 +8,7 @@ const { z } = require("zod");
 const askgroq = require("./generate-roadmap.js");
 const bodyParser = require("body-parser");
 const infoGen = require("./views/VR_AND_AR/info-generator.js");
+const { classData } = require("./models/ClassesData.js");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -58,22 +59,20 @@ app.get("/login", (req, res) => {
 app.get("/classroom", (req, res) => {
   res.render("classroom");
 });
-
 app.get("/classroom/:class", (req, res) => {
   const className = req.params.class;
 
   if (className === "11th" || className === "12th") {
-    res.render("Classes/classes");
+    res.render("Classes/classes", { subjects: classData[className].subjects });
   } else if (
     className === "1st" ||
     className === "2nd" ||
     className === "3rd"
   ) {
-    res.send("We will see later");
-  } else {
-    res.status(404).send("Classroom not found");
-  }
+    res.render("Classes/classes", { subjects: classData[className].subjects });
+  } 
 });
+
 
 app.get("/classroom/subject/:subjectName", (req, res) => {
   const subjectName = req.params.subjectName.toLowerCase();

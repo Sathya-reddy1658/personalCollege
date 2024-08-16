@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom Subjects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -19,34 +18,28 @@
       .montserrat {
         font-family: "Montserrat", sans-serif;
       }
-    </style>
-  </head>
-  <body class="montserrat">
- <div id="main" class="w-full h-[100vh] bg-black " >
-  <%- include("../includes/Navbar.ejs")%>
-  <div class=" pt-10 hero h-[90vh] w-full text-white flex-col flex items-center  " >
-    <h1 class="text-3xl font-bold" >Personal Classroom(AR/VR)</h1>
-    <div class="flex gap-10 mt-20 flex-wrap items-center justify-center " >
-        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('botany')" >Botany</div>
-        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('zoology')" >Zoology</div>
-        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('chemistry')" >Chemistry</div>
-        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('physics')" >Physics</div>
-        <div class="bg-red-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl" onclick="redirect('math')" >Maths</div>
+      </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black montserrat text-black">
+  <%- include("../includes/Navbar.ejs") %>
+  <div class="container mx-auto mt-10">
+    <h1 class="text-white font-bold text-5xl text-center mb-10 " >Personal AR/VR</h1>
+    <div class="flex flex-wrap justify-center mt-10">
+      <% subjects.forEach(subject => { %>
+        <div class="bg-blue-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl m-4 cursor-pointer" onclick="redirect('<%= subject %>')">
+          <h1 class="text-xl" >
+            <%= subject %>
+          </h1>
+        </div>
+      <% }) %>
     </div>
   </div>
- </div>
-    <script>
-        function redirectClassroom() {
-            window.location.href="/classroom"
-        }
 
-        function redirectRoadmapgen(){
-          window.location.href="/roadmap"
-        }
-        function redirect(target) {
-          console.log(`/classroom/subject/${encodeURIComponent(target)}`)
-          window.location.href = `/classroom/subject/${encodeURIComponent(target)}`;
-        }
-    </script>
-  </body>
+  <script>
+    function redirect(subject) {
+      window.location.href = `/classroom/subject/${encodeURIComponent(subject)}`;
+    }
+  </script>
+</body>
 </html>
