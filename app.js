@@ -7,6 +7,7 @@ const port = 8080;
 const { z } = require("zod");
 const askgroq = require("./generate-roadmap.js");
 const bodyParser = require("body-parser");
+const infoGen = require("./views/VR_AND_AR/info-generator.js");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -88,7 +89,6 @@ app.get("/classroom/subject/:subjectName", (req, res) => {
 app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
   const { subjectName, concept } = req.params;
   const subject = subjectsData[subjectName.toLowerCase()];
-
   if (subject) {
     const chapter = subject.chapters.find(
       (chap) => chap.key === concept.toLowerCase()
@@ -102,6 +102,7 @@ app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
           chapter.description || "Detailed information about this concept.",
         models: models.filter((model) => chapter.models.includes(model.name)),
       };
+      console.log(conceptData); 
       res.render("Concepts/concept", { subject, concept: conceptData });
     } else {
       res.status(404).send("Concept not found");
@@ -111,9 +112,13 @@ app.get("/classroom/subject/:subjectName/:concept", (req, res) => {
   }
 });
 
-app.get("/show", (req, res) => {
+app.get("/show/:modelName",async  (req, res) => {
   const modelLink = req.query.link;
-  res.render("VR_AND_AR/show", { link: modelLink });
+  const modelName = req.params.modelName;
+  const info = await infoGen(modelName);
+  console.log(modelName);
+  console.log(info);
+  res.render("VR_AND_AR/show", { link: modelLink, info: info });
 });
 
 //////////////////////////////////////////ROADMAP//////////////////////////////////////////

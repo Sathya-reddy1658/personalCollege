@@ -13,67 +13,15 @@
         <div class="h-[200vh] w-full flex justify-start bg-[#6a00f4] bg-opacity-70 p-[1%] gap-[20px] overflow-hidden">
             <iframe class="h-[40%] w-[65%] rounded-[10px] shadow-lg" title="3D Model Viewer" width="640" height="480"
                 src="<%= link %>" frameborder="0" allow="autoplay; fullscreen; vr" allowfullscreen></iframe>
-            <div class="flex flex-col text-justify w-[30%] border border-black rounded-[15px] p-[10px] h-">
-                <h1 class="text-[50px] font-extrabold">MITOCHONDRIA <br /></h1>
-                <p class="font-extralight">The powerhouses of the cell</p>
-                <hr class="w-[90%] bg-blue-900 h-[5px]">
-                <h2 class="text-[30px] text-20">Brief Overview</h2>
-                <p class="text-[20px] font-extralight">Mitochondria are organelles found in the cells of most
-                    eukaryotes, including animals, plants, and fungi. Their primary function is to generate energy for
-                    the cell through a process called cellular respiration.</p>
-                <hr class="w-[90%] bg-blue-900 h-[5px]">
-                <h2 class="text-[30px] font-bold">Key Information</h2>
-                <ul class="flex flex-col gap-[10px]">
-                    <li class="text-[20px] font-extralight"><strong>Structure:</strong> Mitochondria have two main
-                        parts: the outer membrane and the inner membrane. The inner membrane is folded into cristae,
-                        which increase the surface area for energy production.</li>
-                    <li class="text-[20px] font-extralight"><strong>Functions:</strong> Mitochondria generate energy for
-                        the cell through cellular respiration, regulate cell growth and division, and maintain cellular
-                        metabolism.</li>
-                    <li class="text-[20px] font-extralight"><strong>TYPES:</strong>
-                        <ul class="text-[20px] font-extralight">
-                            <li><strong>Intermyofibrillar mitochondria:</strong> Found between muscle fibers, these
-                                mitochondria provide energy for muscle contraction.</li>
-                            <li><strong>Subsarcolemmal mitochondria:</strong> Found underneath the plasma membrane,
-                                these mitochondria help regulate cellular metabolism.</li>
-                        </ul>
-                    </li>
-                    <li class="text-[20px] font-extralight"><strong>Mitochondrial DNA:</strong> Mitochondria have their
-                        own DNA, known as mtDNA, which is separate from the nuclear DNA found in the cell's nucleus.
-                    </li>
-                    <li class="text-[20px] font-extralight"><strong>Mitochondrial dysfunction:</strong> Mitochondrial
-                        dysfunction has been implicated in various diseases, including neurodegenerative disorders,
-                        metabolic disorders, and cancer.</li>
-                </ul>
-                <hr class="w-[90%] bg-blue-900 h-[5px]">
-                <h2 class="text-[30px] font-bold">Important Facts</h2>
-                <ul class="flex flex-col gap-[10px] text-[20px] font-extralight">
-                    <li><strong>Fact 1:</strong> Mitochondria are found in the cells of most eukaryotes, but not in
-                        prokaryotes like bacteria.</li>
-                    <li><strong>Fact 2:</strong> Mitochondria generate energy for the cell through cellular respiration,
-                        producing ATP as a byproduct.</li>
-                    <li><strong>Fact 3:</strong> Mitochondria have their own DNA, known as mtDNA, which is separate from
-                        the nuclear DNA found in the cell's nucleus.</li>
-                    <li><strong>Fact 4:</strong> Mitochondrial dysfunction has been implicated in various diseases,
-                        including neurodegenerative disorders, metabolic disorders, and cancer.</li>
-                    <li><strong>Fact 5:</strong> Mitochondria can divide and fuse with each other, a process known as
-                        mitochondrial dynamics.</li>
-                </ul>
-                <hr class="w-[90%] bg-blue-900 h-[8px]">
-                <h2 class="text-[30px] font-bold">Additional Information</h2>
-                <ul class="flex flex-col gap-[10px] text-[20px] font-extralight">
-                    <li><strong>Endosymbiotic theory:</strong> Mitochondria are thought to have originated from ancient
-                        bacteria that were engulfed by the cell and evolved into organelles.</li>
-                    <li><strong>Mitochondrial biogenesis:</strong> The process of mitochondrial division and growth,
-                        which is regulated by various cellular signals and pathways.</li>
-                    <li><strong>Mitochondrial dynamics:</strong> The process of mitochondrial division, fusion, and
-                        movement within the cell, which is important for maintaining cellular homeostasis.</li>
-                </ul>
-            </div>
+              <div id="box">
 
+              </div>
+               
         </div>
 
-
+<script>
+    document.getElementById("box").textContent = `${<%- info.replace(/`/g, '&#x60;') %>}`;
+</script>
 </body>
 
 </html>
