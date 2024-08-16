@@ -32,29 +32,29 @@ const subjectsData = {
       },
     ],
   },
-  Basic_Electrical_Engineering: {
-    key: "Basic_Electrical_Engineering",
+  basic_electrical_engineering: {
+    key: "basic_electrical_engineering",
     name: "Basic Electrical Engineering",
     chapters: [
       {
-        key: "Transformers",
+        key: "transformers",
         name: "Transformers",
-        title: "Power and Distribution: Transformers",  
-        description: "Understand how transformers work, including their role in voltage regulation and power distribution in electrical circuits.", 
+        title: "Power and Distribution: Transformers",
+        description: "Understand how transformers work, including their role in voltage regulation and power distribution in electrical circuits.",
         points: 10,
         icon: "https://img.icons8.com/color/48/transformer.png",
-        models: ["EMI", "transformerModel", "engine","turbine"] 
+        models: ["EMI", "transformerModel", "engine", "turbine"]
       },
       {
-        key: "Electrical_Installations",
+        key: "electrical_installations",
         name: "Electrical Installations",
-        title: "Electrical Installations: Safety and Functionality",  
-        description: "Learn about the components and safety measures involved in electrical installations, including circuit breakers and fuses.", 
+        title: "Electrical Installations: Safety and Functionality",
+        description: "Learn about the components and safety measures involved in electrical installations, including circuit breakers and fuses.",
         points: 10,
         icon: "https://img.icons8.com/color/48/electrical.png",
-        models: ["Molded_Case_Circuit_Breaker", "Modular_circuit_breaker_(MCB)", "Electric_Fuse_Cabinet"] 
-      },
-    ],
+        models: ["Molded_Case_Circuit_Breaker", "Modular_circuit_breaker_(MCB)", "Electric_Fuse_Cabinet"]
+      }
+    ]
   },
   biology: {
     key: "biology",
@@ -86,9 +86,9 @@ const subjectsData = {
       },
     ],
   },
-  IOT: {
+  iot: {
     key: "IOT",
-    name: "Internet of Things (IoT)",
+    name: "IOT",
     chapters: [
       {
         key: "ArduinoUno",
