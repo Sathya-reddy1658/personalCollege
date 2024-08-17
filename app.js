@@ -7,8 +7,10 @@ const port = 8080;
 const { z } = require("zod");
 const askgroq = require("./generate-roadmap.js");
 const bodyParser = require("body-parser");
-const infoGen = require("./views/VR_AND_AR/info-generator.js");
+const infoGen = require("./public/js/info-generator.js");
+const  search = require("./public/js/search.js");
 const { classData } = require("./models/ClassesData.js");
+const quiz = require("./public/js/quiz.js");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -118,10 +120,21 @@ app.get("/show/:modelName", async (req, res) => {
   const modelLink = req.query.link;
   const modelName = req.params.modelName;
   const info = await infoGen(modelName);
-  console.log(modelName);
-  //console.log(info);
-  res.render("VR_AND_AR/show", { link: modelLink, info: info });
+  res.render("VR_AND_AR/show", { link: modelLink, info: info, modelName: modelName });
 });
+
+app.get("/search", async (req, res) => {
+  const query = req.query.name;
+  const response = await search(query);
+  res.send(response);
+});
+
+app.get("/quiz", async (req, res) => {
+  const query = req.query.name;
+  const response = await quiz(query);
+  res.send(response);
+});
+
 
 //////////////////////////////////////////ROADMAP//////////////////////////////////////////
 

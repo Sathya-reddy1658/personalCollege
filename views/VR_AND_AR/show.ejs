@@ -10,19 +10,135 @@
 
 <body>
     <%- include("../includes/Navbar.ejs")%>
-    <div class="min-h-screen w-full flex flex-col md:flex-row justify-start bg-gradient-to-br from-[#4a0072] via-[#6a00f4] to-[#9b4dff] p-[4%] gap-[30px] overflow-x-hidden">
-        <div class="w-full md:w-[65vw] aspect-video mb-8 md:mb-0">
-            <iframe class="w-full h-[60vh] rounded-[30px] shadow-2xl transform hover:shadow-2xl transition-all duration-100 ease-in-out backdrop-blur-sm bg-white/10" title="3D Model Viewer"
-                src="<%= link %>" frameborder="0" allow="autoplay; fullscreen; vr" allowfullscreen></iframe>
-        </div>
-        <div id="box" class="w-full md:w-[30vw] text-white">
-            
-        </div>
-    </div>
+        <div
+            class="min-h-screen w-full flex flex-col md:flex-row justify-start bg-gradient-to-br from-[#4a0072] via-[#6a00f4] to-[#9b4dff] p-[4%] gap-[30px] overflow-x-hidden">
+            <div class="w-full md:w-[65vw] aspect-video mb-8 md:mb-0 flex flex-col justify-start items-center gap-[30px]">
+                <iframe
+                    class="w-full h-[70vh] flex-shrink-0 rounded-[30px] shadow-2xl transform hover:shadow-2xl transition-all duration-100 ease-in-out backdrop-blur-sm bg-white/10"
+                    title="3D Model Viewer" src="<%= link %>" frameborder="0" allow="autoplay; fullscreen; vr"
+                    allowfullscreen></iframe>
+                <form id="searchForm"
+                    class="w-full max-w-2xl mx-auto flex justify-center items-center bg-white/10 backdrop-filter backdrop-blur-md rounded-full p-2 shadow-lg">
+                    <input type="text"
+                        class="w-full bg-transparent border-none outline-none text-white placeholder-white/70 font-light text-xl px-6 py-3"
+                        id="searchInput" name="input" placeholder="Wanna ask something...?" autocomplete="off">
+                    <button type="submit"
+                        class="bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-full px-8 py-3 transition-all duration-300 ease-in-out flex items-center justify-center"
+                        id="submit-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Search
+                    </button>
+                </form>
+                <div id="search-output" class=" w-[100%] text-white font-extralight text-[20px]" ></div>
+                <div id="quiz-btn" class="w-[40%] text-center text-white bg-red-600 hover:bg-red-500 active:bg-red-700 font-semibold py-3 px-5 rounded-lg shadow-lg transition-transform transform hover:scale-105 active:scale-95 cursor-pointer">
+                    Take a quiz on this topic
+                </div>
+                
+                  <div id="quiz-box" class="w-[100%] text-white font-medium text-20px">
 
-<script>
-   document.getElementById("box").innerHTML = `<%- info %>`;
-</script>
+                  </div>
+            </div>
+            <div id="box" class="w-full md:w-[30vw] text-white p-[10px]">
+
+            </div>
+           
+        </div>
+
+        <script>
+            let i =0;
+            document.getElementById("box").innerHTML = `<%- info %>`;
+            document.getElementById("searchForm").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const input = document.getElementById("searchInput").value;
+                try {
+                    const response = await fetch(`/search?name=${input}`);
+                    if (response) {
+                        const result = await response.text();
+                        document.getElementById("search-output").innerHTML = result;
+                    } else {
+                        console.error(`${response}`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+            document.getElementById("quiz-btn").addEventListener("click", async (e) => {
+                e.preventDefault();
+                const quiz_query = `<%- modelName %>`;
+                try {
+                    const response = await fetch(`/quiz?name=${quiz_query}`);
+                    if (response) {
+                        const result = await response.text();
+                        quiz(JSON.parse(result));
+                    } else {
+                        console.error(`${response}`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+            
+            function quiz(data) {
+                console.log(data);
+            i++;
+            const quiz_box = document.getElementById("quiz-box");
+            if (Array.isArray(data)) {
+                data.forEach(e => {
+                    quiz_box.innerHTML += `<div class="max-w-4xl mx-auto my-8 p-6 bg-gradient-to-br from-indigo-50 to-blue-100 shadow-lg rounded-2xl border border-indigo-200">
+  <div class="mb-6 p-5 bg-white rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-indigo-800">Q${i}) ${e.question}</h2>
+  </div>
+  
+  <div class="space-y-4">
+    <div class="relative">
+      <input 
+        type="text" 
+        placeholder="Enter your answer" 
+        class="w-full px-5 py-4 text-lg bg-gray-100 text-black placeholder-gray-500 border-2 border-indigo-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out"
+        id="answer-${i}"
+      >
+      <button 
+        class="mt-4 w-full md:w-auto px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition duration-200 ease-in-out"
+        data-answer="${e.answer}" 
+        data-index="${i}"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+  
+  <div id="feedback-${i}" class="mt-8 text-2xl font-bold text-center text-indigo-800"></div>
+</div>
+   `;
+                    i++;
+                });
+
+                document.querySelectorAll("button").forEach(element => {
+                    element.addEventListener("click", () => {
+                        const index = element.getAttribute("data-index");
+                        const answer = document.getElementById(`answer-${index}`).value.trim("").toLocaleLowerCase();
+                        const correctAnswer = element.getAttribute("data-answer").trim("").toLocaleLowerCase();
+                        const feedback = document.getElementById(`feedback-${index}`);
+                        feedback.textContent = "";
+                        if (answer === correctAnswer) {
+                            feedback.textContent = "Correct!";
+                            feedback.classList.add('text-green-600');
+                        } else {
+                            feedback.textContent = `Incorrect!  , The answer is ${correctAnswer}`;
+                            feedback.classList.add('text-red-500');
+                        }
+                    });
+                });
+            } else {
+                console.error("Invalid data format. Expected an array.");
+            }
+        }
+
+        </script>
 </body>
 
 </html>
