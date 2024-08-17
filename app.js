@@ -22,8 +22,12 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/updateProfile", (req, res) => {
+  res.render("DashBoard/updateProfile");
+});
+
 app.get("/dashBoard", (req, res) => {
-  res.render("DashBoard");
+  res.render("DashBoard/DashBoard");
 });
 
 app.get("/signUp", (req, res) => {
