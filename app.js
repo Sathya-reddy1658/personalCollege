@@ -38,6 +38,10 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+app.get("/learn", (req, res) => {
+  res.render("Learnings/learn");
+});
+
 // app.post("/login", (req, res) => {
 //   const { Data } = req.body;
 //   if (Data) {
