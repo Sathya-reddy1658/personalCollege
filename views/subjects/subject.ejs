@@ -3,56 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= subject.name %></title>
+    <title><%= subject.name %> - Chapters</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
       rel="stylesheet"
     />
     <style>
-      h1 {
-        text-transform: uppercase;
-      }
-
-      .montserrat {
+      body {
         font-family: "Montserrat", sans-serif;
+        background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 100%);
       }
-      body::-webkit-scrollbar {
-        display: none;
+      .chapter-card {
+        transition: all 0.3s ease;
+      }
+      .chapter-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
-  <body class="montserrat">
-    <div id="main" class="w-full h-[200vh] bg-black">
-      <%- include("../includes/Navbar.ejs")%>
-      <div
-        class="pt-10 hero h-[100vh] w-full text-white flex-col flex items-center"
-      >
-        <h1 class="text-4xl font-bold">
-          Select the Chapter That You Want to See:
-        </h1>
-        <div
-          class="flex gap-5 mt-20 flex-wrap items-center flex-col justify-center w-full"
-        >
-          <% subject.chapters.forEach(function(chapter) { %>
+  <body class="text-white min-h-screen flex flex-col">
+    <%- include("../includes/Navbar.ejs")%>
+    
+    <main class="flex-grow container mx-auto px-4 py-10">
+      <h1 class="text-3xl md:text-4xl font-bold text-center mb-12 uppercase tracking-wider">
+        Select a Chapter for <span class="text-violet-400"><%= subject.name %></span>
+      </h1>
+      
+      <div class="space-y-6 max-w-4xl mx-auto">
+        <% subject.chapters.forEach(function(chapter) { %>
           <div
             onclick="goToChapter('<%= subject.key %>', '<%= chapter.key %>')"
-            class="flex hover:scale-95 hover:duration-600 justify-between bg-violet-400 py-5 px-10 w-[70%] items-center font-bold rounded-md cursor-pointer"
+            class="chapter-card flex items-center justify-between bg-gradient-to-r from-violet-600 to-violet-800 p-6 rounded-xl cursor-pointer"
           >
-            <img
-              width="48"
-              height="48"
-              src="<%= chapter.icon %>"
-            />
-            <h1><%= chapter.name %></h1>
-            <h1>Earned Points: <%= chapter.points %></h1>
+            <div class="flex items-center space-x-6">
+              <img
+                width="48"
+                height="48"
+                src="<%= chapter.icon %>"
+                alt="<%= chapter.name %> icon"
+                class="w-12 h-12 object-contain"
+              />
+              <h2 class="text-xl font-semibold"><%= chapter.name %></h2>
+            </div>
+            <div class="text-right">
+              <p class="text-sm text-violet-200">Earned Points</p>
+              <p class="text-2xl font-bold"><%= chapter.points %></p>
+            </div>
           </div>
-          <% }); %>
-        </div>
+        <% }); %>
       </div>
-    </div>
+    </main>
+
     <script>
       function goToHome() {
         window.location.href = "/";
@@ -62,9 +67,10 @@
         window.location.href = "/classroom";
       }
 
-      function redirectRoadmapgen(){
-          window.location.href="/roadmap"
-        }
+      function redirectRoadmapgen() {
+        window.location.href = "/roadmap";
+      }
+
       function goToChapter(subjectKey, chapterKey) {
         window.location.href = `/classroom/subject/${subjectKey}/${encodeURIComponent(chapterKey)}`;
       }

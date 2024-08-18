@@ -7,38 +7,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-      .montserrat {
+      body {
         font-family: "Montserrat", sans-serif;
-      }
-      body::-webkit-scrollbar {
-        display: none;
-      }
-      .gradient-bg {
-        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        
+        background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 100%);
       }
       .hover-scale {
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       }
       .hover-scale:hover {
         transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       }
     </style>
   </head>
-  <body class="montserrat bg-gray-900 min-h-screen text-white font-sans">
+  <body class="text-white min-h-screen flex flex-col">
     <%- include("../includes/Navbar.ejs")%>
-    <header class="bg-gradient-to-r from-blue-600 to-purple-600 py-6 text-center">
-      <h1 class="text-3xl font-bold mb-2"><%= subject.name %></h1>
-      <p class="text-xl">Chapter: <%= concept.name %></p>
+    <header class=" py-8 text-center">
+      <h1 class="text-4xl font-bold mb-2"><%= subject.name %></h1>
+      <p class="text-2xl">Chapter: <%= concept.name %></p>
     </header>
 
-    <main class="gradient-bg py-12 px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-4xl font-bold mb-6" data-aos="fade-up"><%= concept.title %></h2>
         <p class="text-lg mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="100"><%= concept.description %></p>
@@ -50,11 +44,13 @@
               data-aos="zoom-in"
               data-aos-delay="<%= index * 100 %>"
               onclick="redirectToShow('<%= model.link %>','<%= model.name %>')"
-              class="bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg shadow-lg overflow-hidden hover-scale cursor-pointer"
+              class="bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg overflow-hidden hover-scale cursor-pointer"
+              role="button"
+              aria-label="Explore 3D model of <%= model.name %>"
             >
               <div class="p-6 flex flex-col items-center justify-center h-48">
-                <h3 class="text-sm font-semibold text-center  "><%= model.name %></h3>
-                <p class="mt-2 text-sm text-center">Click to explore 3D model</p>
+                <h3 class="text-xl font-semibold text-center mb-2"><%= model.name %></h3>
+                <p class="text-sm text-center">Click to explore 3D model</p>
               </div>
             </div>
             <% }); %>
@@ -78,8 +74,8 @@
         window.location.href = "/roadmap";
       }
 
-      function redirectToShow(modelLink,modelName) {
-        window.location.href = `/show/${modelName}?link=${encodeURIComponent(modelLink)}`;
+      function redirectToShow(modelLink, modelName) {
+        window.location.href = `/show/${encodeURIComponent(modelName)}?link=${encodeURIComponent(modelLink)}`;
       }
 
       document.addEventListener('DOMContentLoaded', function() {

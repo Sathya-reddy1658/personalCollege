@@ -3,79 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Personal Classroom (AR/VR)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
       rel="stylesheet"
     />
     <style>
-      h1 {
-        text-transform: uppercase;
-      }
-
-      .montserrat {
+      body {
         font-family: "Montserrat", sans-serif;
+        background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 100%);
+      }
+      .class-card {
+        transition: all 0.3s ease;
+      }
+      .class-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
-  <body class="montserrat">
-    <div id="main" class="w-full h-[100vh] bg-black">
-      <%- include("./includes/Navbar.ejs")%>
-      <div
-        class="pt-10 hero h-[90vh] w-full text-white flex-col flex items-center"
-      >
-        <h1 class="text-3xl font-bold">Personal Classroom(AR/VR)</h1>
-        <div
-          class="flex classCourses gap-10 mt-20 flex-wrap items-center justify-center"
-        >
+  <body class="text-white min-h-screen flex flex-col">
+    <%- include("./includes/Navbar.ejs")%>
+    
+    <main class="flex-grow container mx-auto px-4 py-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-12 uppercase tracking-wider">
+        Personal Classroom <span class="text-violet-400">(AR/VR)</span>
+      </h1>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <% const classes = [
+          { id: '11th', name: '11th' },
+          { id: '12th', name: '12th' },
+          { id: '1st', name: '1st year' },
+          { id: '2nd', name: '2nd year' },
+          { id: '3rd', name: '3rd year' }
+        ]; %>
+        
+        <% classes.forEach(cls => { %>
           <div
-            id="11th"
-            class="bg-violet-500 hover:scale-95 rounded-md h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl cursor-pointer"
-            onclick="redirect('11th')"
+            id="<%= cls.id %>"
+            class="class-card bg-gradient-to-br from-violet-500 to-violet-700 rounded-xl p-8 flex items-center justify-center cursor-pointer"
+            onclick="redirect('<%= cls.id %>')"
           >
-            11th
+            <span class="text-2xl md:text-3xl font-semibold text-center"><%= cls.name %></span>
           </div>
-          <div
-            id="12th"
-            class="bg-violet-500 hover:scale-95 rounded-md h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl cursor-pointer"
-            onclick="redirect('12th')"
-          >
-            12th
-          </div>
-          <div
-            id="1st"
-            class="bg-violet-500 hover:scale-95 rounded-md h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl cursor-pointer"
-            onclick="redirect('1st')"
-          >
-            1st year
-          </div>
-          <div
-            id="2nd"
-            class="bg-violet-500 hover:scale-95 rounded-md h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl cursor-pointer"
-            onclick="redirect('2nd')"
-          >
-            2nd year
-          </div>
-          <div
-            id="3rd"
-            class="bg-violet-500 hover:scale-95 rounded-md h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl cursor-pointer"
-            onclick="redirect('3rd')"
-          >
-            3rd year
-          </div>
-        </div>
+        <% }); %>
       </div>
-    </div>
+    </main>
+
     <script>
       function redirect(target) {
         window.location.href = `/classroom/${encodeURIComponent(target)}`;
       }
-      function redirectRoadmapgen(){
-          window.location.href="/roadmap"
-        }
+      function redirectRoadmapgen() {
+        window.location.href = "/roadmap";
+      }
     </script>
   </body>
 </html>
