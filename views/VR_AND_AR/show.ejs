@@ -47,9 +47,8 @@
             </div>
            
         </div>
-
         <script>
-            let i =0;
+            let i =1;
             document.getElementById("box").innerHTML = `<%- info %>`;
             document.getElementById("searchForm").addEventListener("submit", async (e) => {
                 e.preventDefault();
@@ -84,7 +83,6 @@
             
             function quiz(data) {
                 console.log(data);
-            i++;
             const quiz_box = document.getElementById("quiz-box");
             if (Array.isArray(data)) {
                 data.forEach(e => {

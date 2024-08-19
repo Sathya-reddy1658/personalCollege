@@ -7,7 +7,7 @@ async function quiz(Q) {
         const chatCompletion = await groq.chat.completions.create({
             "messages": [{
                 "role": "user",
-                "content": `Generate a list of 5 unique questions with answers in Array format on the topic of ${Q}. Frame questions in a manner that it has short answers.do not send any other text except the JSON object.`,
+                "content": `Generate a list of 3 unique questions with answers in Array format on the topic of ${Q}. Frame questions in a manner that it has short answers.do not send any other text except the JSON object.`,
             }],
             "model": "llama3-70b-8192",
             "temperature": 1,
