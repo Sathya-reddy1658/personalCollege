@@ -15,30 +15,30 @@
       h1 {
         text-transform: uppercase;
       }
-
+      
       .montserrat {
         font-family: "Montserrat", sans-serif;
       }
     </style>
   </head>
   <body class="montserrat">
- <div id="main" class="w-full h-16 bg-black " >
-  <%- include("./includes/Navbar.ejs")%>
- </div>
- <div>
-    <h1 class="text-4xl px-5 py-3 text-center">Enter a skill you want to learn</h1>
-    <form method="POST" action="/roadmap" class="flex justify-center gap-5 my-1 py-1 mx-3 px-2">
-        <input type="text" name="prompt" required class="border border-black w-60 md:w-96">
-        <input type="submit" value="Generate Roadmap" class="border border-black rounded-sm px-2 py-1 cursor-pointer">
-    </form>
- </div>
+    <div id="main" class="w-full h-16 bg-black">
+      <%- include("./includes/Navbar.ejs")%>
+    </div>
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl px-5 py-3 text-center">Enter a skill you want to learn</h1>
+      <form method="POST" action="/roadmap" class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5 my-1 py-1">
+        <input type="text" name="prompt" required class="border border-black w-full sm:w-60 md:w-96 px-2 py-1">
+        <input type="submit" value="Generate Roadmap" class="border border-black rounded-sm px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors">
+      </form>
+    </div>
     <script>
-        function redirectClassroom() {
-            window.location.href="/classroom"
-        }
-        function redirectRoadmapgen(){
-          window.location.href="/roadmap"
-        }
+      function redirectClassroom() {
+        window.location.href="/classroom"
+      }
+      function redirectRoadmapgen(){
+        window.location.href="/roadmap"
+      }
     </script>
   </body>
 </html>
