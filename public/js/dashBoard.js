@@ -1,10 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import {
   getAuth,
-  onAuthStateChanged, //AuthObserver 
+  onAuthStateChanged, // AuthObserver
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-const firebaseConfig = {
+// import { firebaseConfig } from "../../config/firebaseConfig.js";
+export const firebaseConfig = {
   apiKey: "AIzaSyCNdibGOnov2bBTXv1rAfei60Tl1Of4jjk",
   authDomain: "smarteducationauth.firebaseapp.com",
   projectId: "smarteducationauth",
@@ -16,14 +17,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-document
-  .querySelector(".nav-img")
-  .addEventListener("click", () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "/dashBoard";
-      } else {
-        window.location.href = "/login"; 
-      }
-    });
+document.querySelector(".nav-img").addEventListener("click", () => {
+  onAuthStateChanged(auth, (user) => {
+    console.log("Auth state changed:", user);
+    if (!user) {
+      window.location.href = "/login";
+    } else {
+      window.location.href = "/dashBoard";
+    }
   });
+  
+});

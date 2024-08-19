@@ -22,25 +22,8 @@
     </style>
 </head>
 <body class="montserrat">
-<div id="main" class="w-full h-20 bg-black ">
-    <nav
-        class="h-[10vh] w-full bg-black text-white flex justify-between px-10 items-center"
-    >
-        <h1 class="text-3xl cursor-pointer" onclick="window.location.href='/'">Pre-College</h1>
-        <div class="flex justify-center gap-20 items-center">
-            <div class="flex gap-10">
-                <h1 class="text-xl cursor-pointer" onclick="redirectClassroom()">Classroom</h1>
-                <h1 class="text-xl cursor-pointer" onclick="redirectRoadmapgen()">Pro Roadmap</h1>
-            </div>
-            <div class="rounded-full h-10 overflow-hidden w-10 bg-white">
-                <img
-                    src="../assets/user.png"
-                    class="h-full w-full cursor-pointer"
-                    alt=""
-                />
-            </div>
-        </div>
-    </nav>
+<div id="main" class="w-full h-20 ">
+    <%- include("./includes/Navbar.ejs")%>
 </div>
 <div class="px-5 py-3">
     <% if (resp) { %>

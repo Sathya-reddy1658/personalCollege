@@ -4,37 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Classroom Subjects</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      h1 {
-        text-transform: uppercase;
-      }
-
-      .montserrat {
-        font-family: "Montserrat", sans-serif;
-      }
-      </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 100%);
+    }
+    .subject-card {
+      transition: all 0.3s ease;
+    }
+    .subject-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
-<body class="bg-black montserrat text-black">
+<body class="text-white min-h-screen flex flex-col">
   <%- include("../includes/Navbar.ejs") %>
-  <div class="container mx-auto mt-10">
-    <h1 class="text-white font-bold text-5xl text-center mb-10 " >Personal AR/VR</h1>
-    <div class="flex flex-wrap justify-center mt-10">
+  
+  <main class="flex-grow container mx-auto px-4 py-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-center mb-12 uppercase tracking-wider">
+      Personal <span class="text-blue-400">AR/VR</span> Classroom
+    </h1>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       <% subjects.forEach(subject => { %>
-        <div class="bg-blue-200 h-[30vh] w-[20vw] flex items-center justify-center text-center text-4xl m-4 cursor-pointer" onclick="redirect('<%= subject %>')">
-          <h1 class="text-xl" >
-            <%= subject %>
-          </h1>
+        <div 
+          class="subject-card bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl p-6 flex items-center justify-center cursor-pointer shadow-lg"
+          onclick="redirect('<%= subject %>')"
+        >
+          <h2 class="text-xl md:text-2xl font-semibold text-center"><%= subject %></h2>
         </div>
       <% }) %>
     </div>
-  </div>
+  </main>
 
   <script>
     function redirect(subject) {

@@ -22,8 +22,12 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/updateProfile", (req, res) => {
+  res.render("DashBoard/updateProfile");
+});
+
 app.get("/dashBoard", (req, res) => {
-  res.render("DashBoard");
+  res.render("DashBoard/DashBoard");
 });
 
 app.get("/signUp", (req, res) => {
@@ -32,6 +36,10 @@ app.get("/signUp", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login");
+});
+
+app.get("/learn", (req, res) => {
+  res.render("Learnings/learn");
 });
 
 // app.post("/login", (req, res) => {
