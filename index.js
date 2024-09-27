@@ -1,6 +1,7 @@
 const express = require("express");
 const { subjectsData } = require("./models/subjectData.js");
 const models = require("./models/models.js");
+const path = require('path');
 const app = express();
 require("dotenv").config();
 const port = 3000;
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 app.use(express.json());
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
